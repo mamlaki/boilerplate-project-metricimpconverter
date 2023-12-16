@@ -3,12 +3,19 @@ function ConvertHandler() {
   this.getNum = function(input) {
     let result;
 
-    if (input.match(/^[\d./]+/)) {
+    if (input && input.match(/^[\d./]+/)) {
       try {
+        const fractionCount = input.split('/')
+        if (fractionCount.length > 2) {
+          throw new Error('Invalid input. Double fractions are not allowed.')
+        }
+        
         result = eval(input.match(/^[\d./]+/)[0])
       } catch (err) {
         result = null
       }
+    } else {
+      result = 1
     }
 
     return result
@@ -51,7 +58,7 @@ function ConvertHandler() {
       'lbs': 'pounds',
       'kg': 'kilograms',
       'mi': 'miles',
-      'km': 'kilometeres'
+      'km': 'kilometers'
     }
     
     return unitNames[unit.toLowerCase()] || null;
