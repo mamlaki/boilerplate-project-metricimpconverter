@@ -5,7 +5,7 @@ function ConvertHandler() {
 
     if (input.match(/^[\d./]+/)) {
       try {
-        result = eval(match[0])
+        result = eval(input.match(/^[\d./]+/)[0])
       } catch (err) {
         result = null
       }
@@ -75,7 +75,7 @@ function ConvertHandler() {
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    const spelledOutInitUnit = this.spellOutUit(initUnit)
+    const spelledOutInitUnit = this.spellOutUnit(initUnit)
     const spelledOutReturnUnit = this.spellOutUnit(returnUnit)
 
     let result = `${initNum} ${spelledOutInitUnit} converts to ${returnNum} ${spelledOutReturnUnit}`
