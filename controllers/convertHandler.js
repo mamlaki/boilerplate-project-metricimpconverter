@@ -2,41 +2,85 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     let result;
-    
-    return result;
+
+    if (input.match(/^[\d./]+/)) {
+      try {
+        result = eval(match[0])
+      } catch (err) {
+        result = null
+      }
+    }
+
+    return result
   };
   
   this.getUnit = function(input) {
-    let result;
+    const units = ['gal', 'l', 'lbs', 'kg', 'mi', 'km']
+    const match = input.match(/[a-zA-Z]+$/)
+
+    let result = match ? match[0].toLowerCase() : null;
     
-    return result;
+    if (units.includes(result)) {
+      return result
+    } else {
+      return null
+    }
   };
   
   this.getReturnUnit = function(initUnit) {
-    let result;
-    
-    return result;
+    const unitMap = {
+      'gal': 'l',
+      'lbs': 'kg',
+      'mi': 'km'
+    }
+
+    initUnit = initUnit.toLowerCase()
+
+    if (unitMap[initUnit]) {
+      return unitMap[initUnit]
+    } else {
+      const reverseUnit = Object.keys(unitMap).find(key => unitMap[key] === initUnit)
+      return reverseUnit || null
+    }
   };
 
   this.spellOutUnit = function(unit) {
-    let result;
+    const unitNames = {
+      'gal': 'gallons',
+      'l': 'liters',
+      'lbs': 'pounds',
+      'kg': 'kilograms',
+      'mi': 'miles',
+      'km': 'kilometeres'
+    }
     
-    return result;
+    return unitNames[unit.toLowerCase()] || null;
   };
   
   this.convert = function(initNum, initUnit) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
-    let result;
+
+    const conversions = {
+      'gal': initNum * galToL,
+      'l': initNum / galToL,
+      'lbs': initNum * lbsToKg,
+      'kg': initNum / lbsToKg,
+      'mi': initNum * miToKm,
+      'km': initNum / miToKm
+    }
     
-    return result;
+    return conversions[initUnit.toLowerCase()] || null;
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let result;
-    
-    return result;
+    const spelledOutInitUnit = this.spellOutUit(initUnit)
+    const spelledOutReturnUnit = this.spellOutUnit(returnUnit)
+
+    let result = `${initNum} ${spelledOutInitUnit} converts to ${returnNum} ${spelledOutReturnUnit}`
+
+    return result
   };
   
 }
