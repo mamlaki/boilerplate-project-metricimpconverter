@@ -78,7 +78,7 @@ function ConvertHandler() {
       'km': initNum / miToKm
     }
     
-    return conversions[initUnit.toLowerCase()] || null;
+    return conversions[initUnit.toLowerCase()].toFixed(5) || null;
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {

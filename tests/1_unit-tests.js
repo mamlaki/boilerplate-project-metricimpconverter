@@ -65,4 +65,35 @@ suite('Unit Tests', function(){
       assert.equal(convertHandler.spellOutUnit('km'), 'kilometers', 'km should return kilometers.')
     })
   })
+
+  suite('Conversions', () => {
+    // gal to L
+    test('convertHandler should correctly convert gal to L', () => {
+      assert.equal(convertHandler.convert(3, 'gal'), 11.35623, 'gal is not converting to L correctly.')
+    })
+    // L to gal
+    test('convertHandler should correctly convert L to gal', () => {
+      assert.equal(convertHandler.convert(3, 'L'), 0.79252, 'L is not converting to gal correctly.')
+    })
+
+    // mi to km
+    test('convertHandler should correctly convert mi to km', () => {
+      assert.equal(convertHandler.convert(3, 'mi'), 4.82802, 'mi is not converting to km correctly.')
+    })
+    // km to mi
+    test('convertHandler should correctly convert km to mi', () => {
+      assert.equal(convertHandler.convert(3, 'km'), 1.86412, 'km is not converting to mi correctly.')
+    })
+
+    // lbs to kg
+    test('convertHandler should correctly convert lbs to kg', () => {
+      assert.equal(convertHandler.convert(3, 'lbs'), 1.36078, 'lbs is not converting to kg correctly.')
+    })
+    // kg to lbs
+    test('convertHandler should correctly convert kg to lbs', () => {
+      assert.equal(convertHandler.convert(3, 'kg'), 6.61387, 'kg is not converting to lbs correctly.')
+    })
+
+    
+  })
 });
