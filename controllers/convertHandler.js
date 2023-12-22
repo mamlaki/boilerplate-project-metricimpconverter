@@ -22,17 +22,17 @@ function ConvertHandler() {
   };
   
   this.getUnit = function(input) {
-    const units = ['gal', 'L', 'lbs', 'kg', 'mi', 'km']
+    const units = ['gal', 'l', 'lbs', 'kg', 'mi', 'km']
     const match = input.match(/[a-zA-Z]+$/)
 
-    let result = match ? match[0] : null;
-
-    if (result === 'l') {
-      result = result.toUpperCase()
-    }
+    let result = match ? match[0].toLowerCase() : null;
     
     if (units.includes(result)) {
-      return result
+      if (result === 'l') {
+        return result.toUpperCase()
+      } else {
+        return result
+      }
     } else {
       return null
     }
@@ -43,6 +43,10 @@ function ConvertHandler() {
       'gal': 'L',
       'lbs': 'kg',
       'mi': 'km'
+    }
+
+    if (initUnit !== 'L') {
+      initUnit = initUnit.toLowerCase()
     }
 
     if (unitMap[initUnit]) {
