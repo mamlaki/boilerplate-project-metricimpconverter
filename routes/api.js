@@ -11,7 +11,13 @@ module.exports = function (app) {
     const num = convertHandler.getNum(req.query.input)
     const unit = convertHandler.getUnit(req.query.input)
 
-    if ((num === null && unit === null) || (num === null) || (unit === null)) return res.json('invalid number and unit')
+    if (num === null && unit === null) {
+      return res.json('invalid number and unit')
+    } else if (num === null) {
+      return res.json('invalid number')
+    } else if (unit === null) {
+      return res.json('invalid unit')
+    }
 
     const convertedNum = convertHandler.convert(num, unit)
     const returnUnit = convertHandler.getReturnUnit(unit)
