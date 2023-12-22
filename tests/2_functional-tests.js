@@ -17,7 +17,7 @@ suite('Functional Tests', function() {
   test('Convert an invalid input such as 32g: GET request to /api/convert.', (done) => {
     chai.request(server).keepOpen().get('/api/convert?input=32g').end((err, res) => {
       assert.equal(res.status, 200)
-      assert.equal(res.text, '"invalid number and unit"', 'The wrong error message is being rendered.')
+      assert.equal(res.text, '"invalid unit"', 'The wrong error message is being rendered.')
       done()
     })
   })
@@ -25,7 +25,7 @@ suite('Functional Tests', function() {
   test('Convert an invalid number such as 3/7.2/4kg: GET request to /api/convert.', (done) => {
     chai.request(server).keepOpen().get('/api/convert?input=3/7.2/4kg').end((err, res) => {
       assert.equal(res.status, 200)
-      assert.equal(res.text, '"invalid number and unit"', 'The wrong error message is being rendered.')
+      assert.equal(res.text, '"invalid number"', 'The wrong error message is being rendered.')
       done()
     })
   })
