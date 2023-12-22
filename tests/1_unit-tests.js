@@ -34,7 +34,8 @@ suite('Unit Tests', function(){
     // Read valid units
     test('convertHandler should correctly read each valid input unit', () => {
       assert.equal(convertHandler.getUnit('gal'), 'gal', 'gal is not being read correctly.')
-      assert.equal(convertHandler.getUnit('l'), 'l', 'L is not being read correctly.')
+      assert.equal(convertHandler.getUnit('l'), 'L', 'L is not being read correctly.')
+      assert.equal(convertHandler.getUnit('L'), 'L', 'L is not being read correctly.')
       assert.equal(convertHandler.getUnit('lbs'), 'lbs', 'lbs is not being read correctly.')
       assert.equal(convertHandler.getUnit('kg'), 'kg', 'kg is not being read correctly.')
       assert.equal(convertHandler.getUnit('mi'), 'mi', 'mi is not being read correctly.')
@@ -45,9 +46,9 @@ suite('Unit Tests', function(){
       assert.isNull(convertHandler.getUnit('f'), 'Invalid units should return null.')
     })
     // Return the correct unit based on valid input
-    test('convertHandler shoiuld return the correct return unit for each valid input unit.', () => {
-      assert.equal(convertHandler.getReturnUnit('gal'), 'l', 'gal should return l')
-      assert.equal(convertHandler.getReturnUnit('l'), 'gal', 'l should return gal')
+    test('convertHandler should return the correct return unit for each valid input unit.', () => {
+      assert.equal(convertHandler.getReturnUnit('gal'), 'L', 'gal should return L')
+      assert.equal(convertHandler.getReturnUnit('L'), 'gal', 'L should return gal')
       
       assert.equal(convertHandler.getReturnUnit('lbs'), 'kg', 'lbs should return kg')
       assert.equal(convertHandler.getReturnUnit('kg'), 'lbs', 'kg should return lbs')
