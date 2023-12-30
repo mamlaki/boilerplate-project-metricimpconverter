@@ -1,7 +1,97 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    font-family: 'Playfair Display', serif;
+    /* font-family: Helvetica, Arial, sans-serif; */
+    background-color: #FFFCF2;
+    color: #252422;
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-weight: 900;
+    text-align: center;
+}
+
+header p {
+    font-weight: 600;
+}
+
+header a {
+    color: #403D39;
+    /* text-decoration: none; */
+    transition: color 0.2s;
+}
+
+header a:hover {
+    color: #EB5E28;
+}
+
+h3 {
+    text-align: center;
+}
+
 code {
     background-color: whitesmoke;
 }
 
 section, header {
     margin: 50px;
+}
+
+#convertForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#convert {
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    background-color: #403D39;
+    color: white;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px 0px #00000030;
+}
+
+#convert:hover {
+    background-color: #EB5E28;
+}
+
+#convert:active {
+    box-shadow: none;
+}
+
+#convertField {
+    border: 2px solid #403D39;
+    border-radius: 0.4rem;
+}
+
+#convertField:focus {
+    outline: 2px solid #EB5E28;
+    border: 2px solid #EB5E28;
+}
+
+@media (min-width: 768px) 
+{
+    h3,
+    #testui {
+        text-align: left;
+    }
+
+    #convertForm {
+        display: block;
+    }
+
+    #convertField {
+        margin-right: 0.4rem;
+    }
 }
