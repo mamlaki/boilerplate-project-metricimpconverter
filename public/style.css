@@ -80,11 +80,49 @@ section, header {
     border: 2px solid #EB5E28;
 }
 
+.title-w-icon svg {
+    cursor: pointer;
+    transition: 0.2s stroke;
+    display: block;
+    margin: 0 auto 2rem auto;
+    animation: breathing 2s ease-in-out infinite;
+}
+
+.title-w-icon svg:hover {
+    stroke: #EB5E28;
+    animation: none;
+}
+
+@keyframes breathing {
+    0%,
+    100% {
+        stroke-opacity: 1;
+    }
+
+    50% {
+        stroke-opacity: 0.3;
+    }
+}
+
 @media (min-width: 768px) 
 {
     h3,
     #testui {
         text-align: left;
+    }
+
+    .title-w-icon {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .title-w-icon:first-of-type {
+        gap: 1.7rem;
+    }
+
+    .title-w-icon svg {
+        margin: 0;
     }
 
     #convertForm {
