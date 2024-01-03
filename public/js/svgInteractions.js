@@ -13,11 +13,29 @@ svgs.forEach(svg => {
 
 // Reveal the respective info modal when an icon is clicked.
 document.addEventListener('DOMContentLoaded', () => {
+  let openModals = []
+
+  const repositionModal = (modal) => {
+    let offset = 50
+    let lastModal = openModals[openModals.length - 1]
+
+    if (lastModal) {
+      let rect = lastModal.getBoundingClientRect()
+      modal.style.top = rect.bottom + offset + 'px'
+    } else {
+      modal.style.top = ''
+    }
+
+    openModals.push(modal)
+  }
+
   // Open modal when icon is clicked.
   document.querySelectorAll('.hint-icon').forEach(icon => {
     icon.addEventListener('click', () => {
       let modalId = icon.id.replace('icon', 'modal')
-      document.getElementById(modalId).style.display = 'block'
+      let modal = document.getElementById(modalId)
+      modal.style.display = 'block'
+      repositionModal(modal)
     })
   })
 
@@ -26,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', () => {
       let modal = button.closest('.info-popup')
       modal.style.display = 'none'
-
+      openModals = openModals.filter(currentModal => currentModal !== modal)
       modal.style.left = ''
       modal.style.top = ''
     })
