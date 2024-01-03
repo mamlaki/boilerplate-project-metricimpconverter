@@ -1,3 +1,8 @@
+:root {
+    --macos-traffic-lightred: #ff5f57;
+    --macos-traffic-darkred: #9b0002;
+}
+
 html {
     font-size: 62.5%;
 }
@@ -51,8 +56,7 @@ section, header {
     gap: 1rem;
 }
 
-#convert,
-.close-button {
+#convert {
     border: none;
     padding: 0.5rem;
     border-radius: 0.4rem;
@@ -63,8 +67,7 @@ section, header {
     box-shadow: 0px 2px 4px 0px #00000030;
 }
 
-#convert:hover,
-.close-button:hover {
+#convert:hover {
     background-color: #EB5E28;
 }
 
@@ -97,9 +100,9 @@ section, header {
 
 .info-popup {
     position: absolute;
-    display: block;
+    display: none;
     background-color: #403D39;
-    border-radius: 0.4rem;
+    border-radius: 0.9rem;
     padding: 2rem;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     left: 45%;
@@ -113,7 +116,7 @@ section, header {
 
 .drag-icon {
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 10px;
     cursor: move;
     stroke: #FFFCF2;
@@ -121,13 +124,39 @@ section, header {
 }
 
 .close-button {
-    background-color: #FFFCF2;
-    color: #252422;
-    box-shadow: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 13px;
+    height: 13px;
+    background-color: var(--macos-traffic-lightred);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.close-button:hover {
-    color: #FFFCF2;
+.close-button::before,
+.close-button::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background-color: transparent;
+    border-radius: 0.1rem;
+}
+
+.close-button::before {
+    transform: rotate(45deg);
+}
+
+.close-button::after {
+    transform: rotate(-45deg);
+}
+
+.close-button:hover::before,
+.close-button:hover::after {
+    background-color: var(--macos-traffic-darkred);
 }
 
 @keyframes breathing {
