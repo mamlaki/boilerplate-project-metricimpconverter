@@ -27,4 +27,36 @@ document.addEventListener('DOMContentLoaded', () => {
       button.parentElement.style.display = 'none'
     })
   })
+
+  // Make modals draggable.
+  document.querySelectorAll('.drag-icon').forEach(icon => {
+    let modal = icon.closest('.info-popup')
+
+    icon.addEventListener('mousedown', (event) => {
+      let shiftX = event.clientX - modal.getBoundingClientRect().left
+      let shiftY = event.clientY - modal.getBoundingClientRect().top
+
+      const moveAt = (pageX, pageY) => {
+        modal.style.left = pageX - shiftX + 'px'
+        modal.style.top = pageY - shiftY + 'px'
+      }
+
+      const onMouseMove = (event) => {
+        moveAt(event.pageX, event.pageY)
+      }
+
+      moveAt(event.pageX, event.pageY)
+
+      document.addEventListener('mousemove', onMouseMove)
+
+      const onMouseUp = () => {
+        document.removeEventListener('mousemove', onMouseMove)
+        document.removeEventListener('mouseup', onMouseUp)
+      }
+
+      document.addEventListener('mouseup', onMouseUp)
+    })
+    
+    icon.ondragstart = () => false
+  })
 })

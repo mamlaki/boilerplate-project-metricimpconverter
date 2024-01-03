@@ -80,7 +80,7 @@ section, header {
     border: 2px solid #EB5E28;
 }
 
-.title-w-icon svg {
+.title-w-icon svg:not(.drag-icon) {
     cursor: pointer;
     transition: 0.2s stroke;
     display: block;
@@ -102,6 +102,17 @@ section, header {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     left: 45%;
     top: 50%;
+}
+
+.info-popup p {
+    margin-top: 3rem;
+}
+
+.drag-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: move;
 }
 
 @keyframes breathing {
