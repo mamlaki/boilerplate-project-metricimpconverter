@@ -14,6 +14,10 @@ svgs.forEach(svg => {
 // Reveal the respective info modal when an icon is clicked.
 document.addEventListener('DOMContentLoaded', () => {
   let openModals = []
+  const BASE_Z_INDEX = 1000
+  let highestZIndex = BASE_Z_INDEX
+
+  const getNextHighestZIndex = () => highestZIndex++
 
   const repositionModal = (modal) => {
     let offset = 50
@@ -36,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let modal = document.getElementById(modalId)
       modal.style.display = 'block'
       repositionModal(modal)
+      modal.style.zIndex = getNextHighestZIndex()
     })
   })
 
@@ -55,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let modal = icon.closest('.info-popup')
 
     icon.addEventListener('mousedown', (event) => {
+      modal.style.zIndex = getNextHighestZIndex()
       let shiftX = event.clientX - modal.getBoundingClientRect().left
       let shiftY = event.clientY - modal.getBoundingClientRect().top
 
@@ -80,5 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     icon.ondragstart = () => false
+  })
+
+  document.querySelectorAll('.info-popup').forEach(popup => {
+    popup.addEventListener('click', () => {
+      popup.style.zIndex = getNextHighestZIndex()
+    }) 
   })
 })
