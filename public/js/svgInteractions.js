@@ -60,13 +60,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let modal = icon.closest('.info-popup')
 
     icon.addEventListener('mousedown', (event) => {
+      document.body.style.userSelect = 'none'
       modal.style.zIndex = getNextHighestZIndex()
       let shiftX = event.clientX - modal.getBoundingClientRect().left
       let shiftY = event.clientY - modal.getBoundingClientRect().top
 
       const moveAt = (pageX, pageY) => {
+        let modalRect = modal.getBoundingClientRect()
+        let windowHeight = window.innerHeight
+
+        let newTop = pageY - shiftY
+
+        if (newTop < 0) newTop = 0
+        if (newTop + modalRect.height > windowHeight) {
+          newTop = windowHeight - modalRect.height
+        }
+
         modal.style.left = pageX - shiftX + 'px'
-        modal.style.top = pageY - shiftY + 'px'
+        modal.style.top = newTop + 'px'
       }
 
       const onMouseMove = (event) => {
@@ -78,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.addEventListener('mousemove', onMouseMove)
 
       const onMouseUp = () => {
+        document.body.style.userSelect = ''
         document.removeEventListener('mousemove', onMouseMove)
         document.removeEventListener('mouseup', onMouseUp)
       }
