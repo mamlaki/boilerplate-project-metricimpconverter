@@ -51,7 +51,8 @@ section, header {
     gap: 1rem;
 }
 
-#convert {
+#convert,
+.close-button {
     border: none;
     padding: 0.5rem;
     border-radius: 0.4rem;
@@ -62,7 +63,8 @@ section, header {
     box-shadow: 0px 2px 4px 0px #00000030;
 }
 
-#convert:hover {
+#convert:hover,
+.close-button:hover {
     background-color: #EB5E28;
 }
 
@@ -95,13 +97,14 @@ section, header {
 
 .info-popup {
     position: absolute;
-    display: none;
-    background-color: white;
-    border: 1px solid #ddd;
-    padding: 10px;
+    display: block;
+    background-color: #403D39;
+    border-radius: 0.4rem;
+    padding: 2rem;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     left: 45%;
     top: 50%;
+    color: #FFFCF2;
 }
 
 .info-popup p {
@@ -113,6 +116,18 @@ section, header {
     top: 10px;
     right: 10px;
     cursor: move;
+    stroke: #FFFCF2;
+    width: 18px;
+}
+
+.close-button {
+    background-color: #FFFCF2;
+    color: #252422;
+    box-shadow: none;
+}
+
+.close-button:hover {
+    color: #FFFCF2;
 }
 
 @keyframes breathing {
