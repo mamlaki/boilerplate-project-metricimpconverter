@@ -24,7 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close modal when close button is clicked.
   document.querySelectorAll('.close-button').forEach(button => {
     button.addEventListener('click', () => {
-      button.parentElement.style.display = 'none'
+      let modal = button.closest('.info-popup')
+      modal.style.display = 'none'
+
+      modal.style.left = ''
+      modal.style.top = ''
     })
   })
 
@@ -56,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.addEventListener('mouseup', onMouseUp)
     })
-    
+
     icon.ondragstart = () => false
   })
 })
