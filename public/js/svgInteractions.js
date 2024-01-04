@@ -38,8 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
     icon.addEventListener('click', () => {
       let modalId = icon.id.replace('icon', 'modal')
       let modal = document.getElementById(modalId)
-      modal.style.display = 'block'
-      repositionModal(modal)
+      if (modal.style.display !== 'block') {
+        modal.style.display = 'block'
+        repositionModal(modal)
+      }
       modal.style.zIndex = getNextHighestZIndex()
     })
   })
