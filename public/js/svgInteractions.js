@@ -56,53 +56,55 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   // Make modals draggable.
-  document.querySelectorAll('.drag-icon').forEach(icon => {
-    let modal = icon.closest('.info-popup')
+  document.querySelectorAll('.info-popup').forEach(modal => {
+    // Move modal based on mouse position and viewport.
+    const moveAt = (pageX, pageY, shiftX, shiftY) => {
+      let modalRect = modal.getBoundingClientRect()
+      let windowHeight = window.innerHeight
 
-    icon.addEventListener('mousedown', (event) => {
-      document.body.style.userSelect = 'none'
-      modal.style.zIndex = getNextHighestZIndex()
-      let shiftX = event.clientX - modal.getBoundingClientRect().left
-      let shiftY = event.clientY - modal.getBoundingClientRect().top
+      let newTop = pageY - shiftY
 
-      const moveAt = (pageX, pageY) => {
-        let modalRect = modal.getBoundingClientRect()
-        let windowHeight = window.innerHeight
+      if (newTop < 0) newTop = 0
+      if (newTop + modalRect.height > windowHeight) {
+        newTop = windowHeight - modalRect.height
+      }
 
-        let newTop = pageY - shiftY
+      modal.style.left = pageX - shiftX + 'px'
+      modal.style.top = newTop + 'px'
+    }
 
-        if (newTop < 0) newTop = 0
-        if (newTop + modalRect.height > windowHeight) {
-          newTop = windowHeight - modalRect.height
+    // Update modal position during drag.
+    const onMouseMove = (event, shiftX, shiftY) => {
+      moveAt(event.pageX, event.pageY, shiftX, shiftY)
+    }
+
+    // Modal can be dragged when either the drag icon is interacted with or when the modal itself is interacted with.
+    modal.addEventListener('mousedown', (event) => {
+      if (event.target.classList.contains('drag-icon') || event.target === modal) {
+        document.body.style.userSelect = 'none'
+        modal.style.zIndex = getNextHighestZIndex()
+
+        let shiftX = event.clientX - modal.getBoundingClientRect().left
+        let shiftY = event.clientY - modal.getBoundingClientRect().top
+
+        const onMouseMoveBound = event => onMouseMove(event, shiftX, shiftY)
+
+        moveAt(event.pageX, event.PageY, shiftX, shiftY)
+
+        document.addEventListener('mousemove', onMouseMoveBound)
+
+        const onMouseUp = () => {
+          document.body.style.userSelect = ''
+          document.removeEventListener('mousemove', onMouseMoveBound)
+          document.removeEventListener('mouseup', onMouseUp)
         }
 
-        modal.style.left = pageX - shiftX + 'px'
-        modal.style.top = newTop + 'px'
+        document.addEventListener('mouseup', onMouseUp)
+
       }
-
-      const onMouseMove = (event) => {
-        moveAt(event.pageX, event.pageY)
-      }
-
-      moveAt(event.pageX, event.pageY)
-
-      document.addEventListener('mousemove', onMouseMove)
-
-      const onMouseUp = () => {
-        document.body.style.userSelect = ''
-        document.removeEventListener('mousemove', onMouseMove)
-        document.removeEventListener('mouseup', onMouseUp)
-      }
-
-      document.addEventListener('mouseup', onMouseUp)
     })
 
-    icon.ondragstart = () => false
-  })
-
-  document.querySelectorAll('.info-popup').forEach(popup => {
-    popup.addEventListener('click', () => {
-      popup.style.zIndex = getNextHighestZIndex()
-    }) 
+    // Prevent default browser drag behaviour for the modal.
+    modal.ondragstart = () => false
   })
 })
