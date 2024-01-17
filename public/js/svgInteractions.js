@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const moveAt = (pageX, pageY, shiftX, shiftY) => {
       let modalRect = modal.getBoundingClientRect()
       let windowHeight = window.innerHeight
+      let windowWidth = window.innerWidth
 
       let newTop = pageY - shiftY
 
@@ -83,7 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
         newTop = windowHeight - modalRect.height
       }
 
-      modal.style.left = pageX - shiftX + 'px'
+      let newLeft = pageX - shiftX
+      if (newLeft < 0) newLeft = 0
+      if (newLeft + modalRect.width > windowWidth) {
+        newLeft = windowWidth - modalRect.width
+      }
+
+      modal.style.left = newLeft + 'px'
       modal.style.top = newTop + 'px'
     }
 
