@@ -21,13 +21,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const repositionModal = (modal) => {
     let offset = 50
-    let lastModal = openModals[openModals.length - 1]
+    let windowHeight = window.innerHeight
+    let modalHeight = modal.offsetHeight
 
-    if (lastModal) {
-      let rect = lastModal.getBoundingClientRect()
-      modal.style.top = rect.bottom + offset + 'px'
+    if (openModals.length === 0) {
+      modal.style.top = offset
     } else {
-      modal.style.top = ''
+      let lastModal = openModals[openModals.length - 1]
+      let lastModalRect = lastModal.getBoundingClientRect()
+
+      let newTopBelow = lastModalRect.bottom + offset
+      let newTopAbove = lastModalRect.top - modalHeight - offset
+
+      if (newTopBelow + modalHeight <= windowHeight) {
+        modal.style.top = newTopBelow + 'px'
+      } else if (newTopAbove >= 0) {
+        modal.style.top = newTopAbove + 'px'
+      } else {
+        modal.style.top = offset
+      }
     }
 
     openModals.push(modal)
